@@ -1,0 +1,344 @@
+{
+ "p-s002": {
+  "file": "media/plates/p-s002w_claudia-k2-v2-000010x0.75_s863498343_00001_.png",
+  "note": "rendered whole; she walks the aisle up to the stage (Lati: r1-4, worth a try)"
+ },
+ "p-s004": {
+  "file": "media/plates/p-s004k_s1125754147_00001_.png",
+  "repaint_of": "media/plates/p-s004_claudia-k2-v2-000010x0.75_s538082383_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s005": {
+  "file": "media/plates/p-s005d_s267482271_00001_.png",
+  "alt": [
+   "media/plates/p-s005d_s267482271_00001_.png",
+   "media/plates/p-s005d_s593302727_00001_.png"
+  ],
+  "repaint_of": "media/plates/p-s005_claudia-k2-v2-000010x0.75_s115052470_00001_.png",
+  "note": "colour repaint; the first pick had a pale blob behind her raised hand (Lati, rough cut v1); this alt is clean"
+ },
+ "p-s006": {
+  "file": "media/plates/p-s006e_claudia-k2-v2-000010x0.75_s1022109234_00001_.png",
+  "alt": "media/plates/p-s006e_claudia-k2-v2-000010x0.75_s12594410_00001_.png",
+  "note": "behind the podium, rendered whole; Lati: 1 or 3"
+ },
+ "p-s008": {
+  "file": "media/plates/p-s008k_s60726633_00001_.png",
+  "repaint_of": "media/plates/p-s008_claudia-k2-v2-000010x0.75_s1254953394_00001_.png",
+  "note": "colour repaint; Kiln's swap after Lati: the first pick stood her in the crowd; this one has her on a runway into the audience, perspective holds (Lati to confirm)"
+ },
+ "p-s009": {
+  "file": "media/plates/p-s009k_s2111114526_00001_.png",
+  "repaint_of": "media/plates/p-s009_claudia-k2-v2-000010x0.75_s1552273927_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s010": {
+  "file": "media/plates/p-s010k_s294808388_00001_.png",
+  "repaint_of": "media/plates/p-s010_claudia-k2-v2-000010x0.75_s148350975_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s011": {
+  "file": "media/plates/p-s011_claudia-k2-v2-000010x0.75_s1973733354_00001_.png"
+ },
+ "p-s012": {
+  "file": "media/plates/p-s012k_s1576028491_00001_.png",
+  "repaint_of": "media/plates/p-s012_claudia-k2-v2-000010x0.75_s431883055_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s013": {
+  "file": "media/plates/p-s013_claudia-k2-v2-000010x0.75_s147737985_00001_.png"
+ },
+ "p-s014": {
+  "file": "media/plates/p-s014_claudia-k2-v2-000010x0.75_s325400267_00001_.png"
+ },
+ "_alternatives": {
+  "p-s001": "all four, after softer face words (re-roll)",
+  "p-s005": "all three work; p-s006 s1324667322 is a closer zoom",
+  "p-s006": "s1926028557, s35514698, s571323255 work",
+  "p-s008": "all four usable; s1254953394 has the most screen for graphics",
+  "p-s009": "s1552273927 (back), s1595274833, s1783426148, s241761523 usable",
+  "p-s013": "any",
+  "p-s014": "s325400267, s561670963, s654123919"
+ },
+ "p-s001": {
+  "file": "media/plates/p-s001e_claudia-k2-v2-000010x0.75_s1018149598_00001_.png",
+  "alt": "media/plates/p-s001e_claudia-k2-v2-000010x0.75_s337331836_00001_.png",
+  "note": "profile with mic, digital look; Lati: framing fine, 1 or 4 (2 and 3 have an extra mic)"
+ },
+ "p-s038": {
+  "file": "media/plates/p-s038k_s314788265_00001_.png",
+  "repaint_of": "media/plates/p-s038c_claudia-k2-v2-000010x0.75_s1699719958_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s041": {
+  "file": "media/plates/p-s041k_s546398116_00001_.png",
+  "repaint_of": "media/plates/p-s041b_claudia-k2-v2-000010x0.75_s1471167371_00001_.png",
+  "note": "colour repaint; Kiln's swap after Lati: the first had an extra hand behind her (Lati to confirm)"
+ },
+ "_spares": {
+  "p-s016b": [
+   "media/plates/p-s016b_claudia-k2-v2-000010x0.75_s1989005765_00001_.png",
+   "media/plates/p-s016b_claudia-k2-v2-000010x0.75_s663591695_00001_.png"
+  ],
+  "why": "Lati: still good shots, could be used for something else",
+  "p-s016c": [
+   "media/plates/p-s016c_claudia-k2-v2-000010x0.75_s77579175_00001_.png",
+   "media/plates/p-s016c_claudia-k2-v2-000010x0.75_s959820350_00001_.png"
+  ],
+  "why_p-s016c": "Lati: not what was asked (camera still above her), but 1 and 4 have especially good face; a better spare than p-s016b",
+  "p-s069-closeup": "media/plates/p-s069_claudia-k2-v2-000010x0.75_s1283687821_00001_.png",
+  "why_p-s069-closeup": "Lati picked stage 2b r10 image 4 (the s069 close-up) after s069 became the wide"
+ },
+ "p-s039": {
+  "file": "media/plates/p-s039k_s154688569_00001_.png",
+  "repaint_of": "media/plates/p-s039c_claudia-k2-v2-000010x0.75_s2061811578_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s031": {
+  "file": "media/plates/p-s031k_s279414616_00001_.png",
+  "repaint_of": "media/plates/p-s031r_s466584897_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s033": {
+  "file": "media/plates/p-s033k_s83139865_00001_.png",
+  "repaint_of": "media/plates/p-s033_claudia-k2-v2-000010x0.75_s1944960499_00001_.png",
+  "grey_alts": [
+   "media/plates/p-s033_claudia-k2-v2-000010x0.75_s1265366377_00001_.png",
+   "media/plates/p-s033_claudia-k2-v2-000010x0.75_s1674053586_00001_.png",
+   "media/plates/p-s033_claudia-k2-v2-000010x0.75_s1188120561_00001_.png"
+  ],
+  "note": "colour repaint; Lati 25 Oct: r2-3"
+ },
+ "p-s054": {
+  "file": "media/plates/p-s054k_s501405966_00001_.png",
+  "repaint_of": "media/plates/p-s054_claudia-k2-v2-000010x0.75_s1278405454_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s055": {
+  "file": "media/plates/p-s055c_s1599583946_00001_.png",
+  "alt": "media/plates/p-s055c_s2112964835_00001_.png",
+  "repaint_of": "media/plates/p-s055_claudia-k2-v2-000010x0.75_s905044081_00001_.png",
+  "note": "colour repaint: lilac wall, pink neon squiggle; Lati: r4 3 and 4 pretty good"
+ },
+ "p-s056": {
+  "file": "media/plates/p-s056k_s1053559188_00001_.png",
+  "repaint_of": "media/plates/p-s056_claudia-k2-v2-000010x0.75_s522338367_00001_.png",
+  "note": "colour repaint; swapped by Kiln, 1 Nov: the old pick's gloves broke at the elbows (Lati)"
+ },
+ "p-s057": {
+  "file": "media/plates/p-s057k_s1987272464_00001_.png",
+  "repaint_of": "media/plates/p-s057_claudia-k2-v2-000010x0.75_s1290767895_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s058": {
+  "file": "media/plates/p-s058k_s891894300_00001_.png",
+  "repaint_of": "media/plates/p-s058b_claudia-k2-v2-000010x0.75_s93242639_00001_.png",
+  "note": "colour repaint; provisional pick by Kiln overnight (Lati to confirm)"
+ },
+ "p-s035": {
+  "file": "media/plates/p-s035m_s1108985236_00001_.png",
+  "alt": [
+   "media/plates/p-s035m_s1784725213_00001_.png",
+   "media/plates/p-s035m_s2028844940_00001_.png"
+  ],
+  "repaint_of": "media/plates/p-s035b_claudia-k2-v2-000010x0.75_s1403379367_00001_.png",
+  "note": "repaint with the laptop's back in the foreground; Lati: any of 1-3"
+ },
+ "p-s037": {
+  "file": "media/plates/p-s037d_s1812952591_00001_.png",
+  "repaint_of": "media/plates/p-s037b_claudia-k2-v2-000010x0.75_s2061798743_00001_.png",
+  "note": "colour repaint (desk room: teal, violet LED strip, yellow notes, cobalt city); Lati: desk r2-3"
+ },
+ "p-s016": {
+  "file": "media/plates/p-s016d_claudia-k2-v2-000010x0.75_s175432559_00001_.png",
+  "alt": [
+   "media/plates/p-s016d_claudia-k2-v2-000010x0.75_s298206995_00001_.png",
+   "media/plates/p-s016d_claudia-k2-v2-000010x0.75_s918190047_00001_.png",
+   "media/plates/p-s016d_claudia-k2-v2-000010x0.75_s865206998_00001_.png"
+  ],
+  "note": "Lati: much more level than previously; head a bit down, looks straight; fav 1"
+ },
+ "p-s017": {
+  "file": "media/plates/p-s017_claudia-k2-v2-000010x0.75_s1614417759_00001_.png",
+  "alt": "media/plates/p-s017_claudia-k2-v2-000010x0.75_s1920221270_00001_.png"
+ },
+ "p-s018": {
+  "file": "media/plates/p-s018_claudia-k2-v2-000010x0.75_s2011603079_00001_.png",
+  "alt": [
+   "media/plates/p-s018_claudia-k2-v2-000010x0.75_s1787317922_00001_.png",
+   "media/plates/p-s018_claudia-k2-v2-000010x0.75_s1986124556_00001_.png"
+  ]
+ },
+ "p-s019": {
+  "file": "media/plates/p-s019_claudia-k2-v2-000010x0.75_s1546895722_00001_.png",
+  "alt": [
+   "media/plates/p-s019_claudia-k2-v2-000010x0.75_s510795126_00001_.png",
+   "media/plates/p-s019_claudia-k2-v2-000010x0.75_s1916063242_00001_.png"
+  ],
+  "note": "Lati: image 3 dropped, skirt too short"
+ },
+ "p-s020": {
+  "file": "media/plates/p-s020_claudia-k2-v2-000010x0.75_s598720618_00001_.png"
+ },
+ "p-s021": {
+  "file": "media/plates/p-s021_claudia-k2-v2-000010x0.75_s805032062_00001_.png",
+  "alt": [
+   "media/plates/p-s021_claudia-k2-v2-000010x0.75_s1527589624_00001_.png",
+   "media/plates/p-s021_claudia-k2-v2-000010x0.75_s728497949_00001_.png"
+  ]
+ },
+ "p-s022": {
+  "file": "media/plates/p-s022_claudia-k2-v2-000010x0.75_s1928119413_00001_.png",
+  "alt": "media/plates/p-s022_claudia-k2-v2-000010x0.75_s203967824_00001_.png"
+ },
+ "p-s023": {
+  "file": "media/plates/p-s023_claudia-k2-v2-000010x0.75_s791937793_00001_.png",
+  "alt": "media/plates/p-s023_claudia-k2-v2-000010x0.75_s675199547_00001_.png"
+ },
+ "p-s024": {
+  "file": "media/plates/p-s024_claudia-k2-v2-000010x0.75_s186229169_00001_.png",
+  "alt": "media/plates/p-s024_claudia-k2-v2-000010x0.75_s513823805_00001_.png"
+ },
+ "p-s025": {
+  "file": "media/plates/p-s025_claudia-k2-v2-000010x0.75_s76820686_00001_.png"
+ },
+ "p-s026": {
+  "file": "media/plates/p-s026_claudia-k2-v2-000010x0.75_s578294496_00001_.png",
+  "alt": "media/plates/p-s026_claudia-k2-v2-000010x0.75_s259171446_00001_.png"
+ },
+ "p-s027": {
+  "file": "media/plates/p-s027_claudia-k2-v2-000010x0.75_s763600252_00001_.png"
+ },
+ "p-s028": {
+  "file": "media/plates/p-s028_claudia-k2-v2-000010x0.75_s1937798055_00001_.png",
+  "alt": "media/plates/p-s028_claudia-k2-v2-000010x0.75_s938671929_00001_.png",
+  "note": "Lati: 2 would have been good but has big versions behind as backing dancers"
+ },
+ "p-s029": {
+  "file": "media/plates/p-s029_claudia-k2-v2-000010x0.75_s2030585405_00001_.png",
+  "alt": [
+   "media/plates/p-s029_claudia-k2-v2-000010x0.75_s1936758269_00001_.png",
+   "media/plates/p-s029_claudia-k2-v2-000010x0.75_s1691205482_00001_.png"
+  ]
+ },
+ "p-s030": {
+  "file": "media/plates/p-s030_claudia-k2-v2-000010x0.75_s2143367103_00001_.png",
+  "note": "Lati: 3 is superior"
+ },
+ "p-s069": {
+  "file": "media/plates/p-s069w_claudia-k2-v2-000010x0.75_s1819063875_00001_.png",
+  "note": "from behind her at the runway's tip, arms open, facing her dancers with the crowd's phones around; Lati: image 3, a cool shot for the ≈ idea"
+ },
+ "p-s073": {
+  "file": "media/plates/p-s072_claudia-k2-v2-000010x0.75_s1768915548_00001_.png",
+  "note": "renumbered from p-s072 when the outro got its lips-and-mic shot (24 Oct)"
+ },
+ "p-s072": {
+  "file": "media/plates/p-s071_claudia-k2-v2-000010x0.75_s1576167229_00001_.png",
+  "note": "renumbered from p-s071 (24 Oct)"
+ },
+ "p-s071": {
+  "file": "media/plates/p-s001e_claudia-k2-v2-000010x0.75_s1018149598_00001_.png",
+  "note": "same plate as s001: the closing check check"
+ },
+ "p-s043": {
+  "file": "media/plates/p-s043_claudia-k2-v2-000010x0.75_s1545565947_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s044": {
+  "file": "media/plates/p-s044_claudia-k2-v2-000010x0.75_s1809446279_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s045": {
+  "file": "media/plates/p-s045_claudia-k2-v2-000010x0.75_s1528667844_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s046": {
+  "file": "media/plates/p-s046_claudia-k2-v2-000010x0.75_s846852632_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s047": {
+  "file": "media/plates/p-s047_claudia-k2-v2-000010x0.75_s371378346_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s048": {
+  "file": "media/plates/p-s048_claudia-k2-v2-000010x0.75_s1792783849_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s049": {
+  "file": "media/plates/p-s049_claudia-k2-v2-000010x0.75_s1341523000_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s050": {
+  "file": "media/plates/p-s050_claudia-k2-v2-000010x0.75_s1787278767_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s051": {
+  "file": "media/plates/p-s051_claudia-k2-v2-000010x0.75_s398238290_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s052": {
+  "file": "media/plates/p-s052_claudia-k2-v2-000010x0.75_s1163541537_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s053": {
+  "file": "media/plates/p-s053_claudia-k2-v2-000010x0.75_s1759392886_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s060": {
+  "file": "media/plates/p-s060_claudia-k2-v2-000010x0.75_s210691693_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s061": {
+  "file": "media/plates/p-s061_claudia-k2-v2-000010x0.75_s1578342639_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s062": {
+  "file": "media/plates/p-s062_claudia-k2-v2-000010x0.75_s1315236244_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s063": {
+  "file": "media/plates/p-s063_claudia-k2-v2-000010x0.75_s1743171077_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s064": {
+  "file": "media/plates/p-s064_claudia-k2-v2-000010x0.75_s409696880_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s065": {
+  "file": "media/plates/p-s065_claudia-k2-v2-000010x0.75_s1757179612_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s066": {
+  "file": "media/plates/p-s066_claudia-k2-v2-000010x0.75_s351806008_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s067": {
+  "file": "media/plates/p-s067_claudia-k2-v2-000010x0.75_s2070076379_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s068": {
+  "file": "media/plates/p-s068_claudia-k2-v2-000010x0.75_s1144290794_00001_.png",
+  "note": "Lati, stage part 2; the star clip may sit on the other side: mirror in the edit"
+ },
+ "p-s029a": {
+  "file": "media/plates/p-s029a_claudia-k2-v2-000010x0.75_s184058574_00001_.png",
+  "note": "'fine' grid version A; Lati 25 Oct: r1-3"
+ },
+ "p-s029b": {
+  "file": "media/plates/p-s029b_claudia-k2-v2-000010x0.75_s658117278_00001_.png",
+  "note": "'fine' grid version B; Lati 25 Oct: r2-4"
+ },
+ "p-s029c": {
+  "file": "media/plates/p-s029c_claudia-k2-v2-000010x0.75_s230718212_00001_.png",
+  "note": "'fine' grid version C; Lati 25 Oct: r3-2"
+ },
+ "p-s029d": {
+  "file": "media/plates/p-s029d_claudia-k2-v2-000010x0.75_s1703488353_00001_.png",
+  "note": "'fine' grid version D; Lati 25 Oct: r4-4; star clip on her other side, mirror in the grid"
+ },
+ "p-s029e": {
+  "file": "media/plates/p-s029e_claudia-k2-v2-000010x0.75_s2116479786_00001_.png",
+  "note": "'fine' grid version E; Lati 25 Oct: r5-4"
+ }
+}

@@ -1,0 +1,446 @@
+{
+ "_about": "Rough cut v3 (Kiln, 1 Nov): v2 plus Lati's notes of 1 Nov (edit/v3-notes.md). shots.py builds media/clips/shot/<sid>.mp4 from this; roughcut.py plays them. 'fit:NAME' is media/clips/fit/NAME.mp4 (beatfit.py, song-timed, its span in NAME.json); 'raw:NAME' is the Grok take as it is, its time 0 at song time 'at'. shift: + shows the take later (mouth ahead of the vocal), - earlier (skip a still start). offset: song time added before reading the file (a take borrowed from another place in the song). A shot can be segments, each until a song time: a take, a card (the held 'fine' every Grok take dropped; placeholder for the graphics), or a grid. 'file:PATH' is any clip, its time 0 at song time 'at'; speed slows or quickens it. hold: the frame freezes from that song time. punch: hits at those song times. flip: mirrored. 'still:PATH' is a picture with a slow push-in (at, seconds).",
+ "fits": [
+  {
+   "take": "s011grok-3",
+   "at": 29.55
+  },
+  {
+   "take": "s013grok-1",
+   "at": 36.81
+  },
+  {
+   "take": "s014grok-1",
+   "at": 38.63
+  },
+  {
+   "take": "s017grok-1",
+   "at": 44.1
+  },
+  {
+   "take": "s022grok-1",
+   "at": 53.17
+  },
+  {
+   "take": "s028grok-1",
+   "at": 67.67
+  },
+  {
+   "take": "s030grok-1",
+   "at": 71.28
+  },
+  {
+   "take": "s043grok-1",
+   "at": 98.41
+  },
+  {
+   "take": "s044grok-1",
+   "at": 101.99
+  },
+  {
+   "take": "s050grok-1",
+   "at": 112.83
+  },
+  {
+   "take": "s051grok-1",
+   "at": 114.63
+  },
+  {
+   "take": "s053grok-1",
+   "at": 120.03
+  },
+  {
+   "take": "s060grok-1",
+   "at": 149.06
+  },
+  {
+   "take": "s018grok-1",
+   "at": 46.92,
+   "lips": true
+  },
+  {
+   "take": "s020-reroll1",
+   "at": 50.54
+  },
+  {
+   "take": "s023-reroll1",
+   "at": 52.62,
+   "lips": true
+  },
+  {
+   "take": "s024grok-1",
+   "at": 56.48
+  },
+  {
+   "take": "s045grok-1",
+   "at": 104.74,
+   "lips": true
+  },
+  {
+   "take": "s052grok-1",
+   "at": 117.94
+  },
+  {
+   "take": "s052grok-2",
+   "at": 117.94
+  },
+  {
+   "take": "s064-reroll1",
+   "at": 157.86,
+   "lips": true
+  },
+  {
+   "take": "s065grok-1",
+   "at": 161.42
+  },
+  {
+   "take": "s067grok-1",
+   "at": 166.95
+  },
+  {
+   "take": "s048nov-7",
+   "at": 109.22,
+   "lips": true
+  },
+  {
+   "take": "s047nov-1",
+   "at": 107.42,
+   "lips": true
+  },
+  {
+   "take": "s020nov-1",
+   "at": 49.53
+  },
+  {
+   "take": "s020-reroll2",
+   "at": 108.3
+  }
+ ],
+ "shots": {
+  "s002": {
+   "src": "raw:s002grok",
+   "at": 3.42
+  },
+  "s011": {
+   "src": "file:media/clips/local/M011-fast-s1725784777_00001_.mp4",
+   "at": 29.545,
+   "speed": 0.84,
+   "note": "no dancing before 'ready'"
+  },
+  "s013": {
+   "src": "file:media/clips/local/M014-fast-s168702939_00001_.mp4",
+   "at": 36.808,
+   "note": "Lati: jumping on the dance stage before the drop reads weird"
+  },
+  "s014": {
+   "src": "fit:s014grok-1-beat"
+  },
+  "s017": {
+   "src": "fit:s017grok-1-beat",
+   "shift": -0.905,
+   "note": "Lati: her moves start too late; two beats on"
+  },
+  "s018": {
+   "segments": [
+    {
+     "until": 47.19,
+     "src": "fit:s017grok-1-beat",
+     "shift": -0.905
+    },
+    {
+     "src": "fit:s018grok-1-lips"
+    }
+   ],
+   "note": "the take starts at 47.19"
+  },
+  "s020": {
+   "segments": [
+    {
+     "until": 49.98,
+     "src": "fit:s018grok-1-lips"
+    },
+    {
+     "src": "fit:s020nov-1-beat",
+     "shift": 0.45
+    }
+   ],
+   "note": "new take, one beat later so 'every line nothing' lands; lips fit found too few words, slide by eye; the old version was s020-reroll1 with a cutaway"
+  },
+  "s022": {
+   "src": "fit:s023-reroll1-lips",
+   "note": "swapped: 'I checked myself and I'm' is sung over s022's window"
+  },
+  "s023": {
+   "segments": [
+    {
+     "until": 55.7,
+     "card": "FINE"
+    },
+    {
+     "src": "fit:s022grok-1-beat"
+    }
+   ]
+  },
+  "s024": {
+   "src": "fit:s024grok-1-beat"
+  },
+  "s025": {
+   "src": "fit:s052grok-2-beat",
+   "offset": 57.68,
+   "shift": 0.12,
+   "note": "borrowed: s052 take 2 sings the same phrase"
+  },
+  "s026": {
+   "src": "raw:s026grok-1",
+   "at": 63.55
+  },
+  "s027": {
+   "grid": "chant1"
+  },
+  "s028": {
+   "segments": [
+    {
+     "until": 68.12,
+     "grid": "chant1"
+    },
+    {
+     "src": "fit:s028grok-1-beat"
+    }
+   ]
+  },
+  "s029": {
+   "grid": "chant2"
+  },
+  "s030": {
+   "src": "fit:s030grok-1-beat",
+   "shift": -1.0,
+   "note": "Lati: still for the first second"
+  },
+  "s043": {
+   "src": "fit:s043grok-1-beat"
+  },
+  "s044": {
+   "src": "fit:s043grok-1-beat",
+   "note": "Lati, 1 Nov: the walk runs on, the crowd slice is gone; s043's take straight through from 98.41 to 107.87"
+  },
+  "s045": {
+   "src": "fit:s043grok-1-beat",
+   "note": "the walk runs on from s043"
+  },
+  "s050": {
+   "src": "fit:s050grok-1-beat",
+   "shift": -0.905,
+   "note": "Lati: her moves start too late; two beats on"
+  },
+  "s051": {
+   "src": "fit:s051grok-1-beat",
+   "hold": 116.89,
+   "punch": [
+    116.89,
+    117.34,
+    117.79
+   ],
+   "note": "Lati: motion stops with the beat, before the heys"
+  },
+  "s052": {
+   "src": "fit:s052grok-1-beat",
+   "shift": 0.12,
+   "note": "Lati: mouth slightly ahead"
+  },
+  "s053": {
+   "src": "fit:s053grok-1-beat"
+  },
+  "s060": {
+   "src": "fit:s060grok-1-beat"
+  },
+  "s064": {
+   "segments": [
+    {
+     "until": 159.9,
+     "src": "fit:s064-reroll1-lips"
+    },
+    {
+     "until": 160.52,
+     "card": "FINE"
+    },
+    {
+     "src": "fit:s064-reroll1-lips"
+    }
+   ]
+  },
+  "s065": {
+   "src": "fit:s065grok-1-beat"
+  },
+  "s066": {
+   "src": "raw:s066grok-1",
+   "at": 164.84
+  },
+  "s067": {
+   "src": "fit:s067grok-1-beat"
+  },
+  "s005": {
+   "segments": [
+    {
+     "until": 14.729,
+     "src": "file:media/clips/local/M041-fast-s1549134092_00001_.mp4",
+     "at": 13.074
+    },
+    {
+     "card": "NEW TAB"
+    }
+   ],
+   "note": "Lati: M041 until just before 'new tab'; placeholder for the graphics"
+  },
+  "s008": {
+   "src": "file:media/clips/local/M008-fast-s1081813792_00001_.mp4",
+   "at": 22.245
+  },
+  "s009": {
+   "src": "raw:s009nov-1",
+   "at": 24.065,
+   "note": "Lati: animated; Grok, her back to us; replaces the depth parallax"
+  },
+  "s015": {
+   "src": "fit:s014grok-1-beat",
+   "note": "Lati: s014 extended a second or two"
+  },
+  "s019": {
+   "src": "fit:s018grok-1-lips",
+   "note": "s018's take runs on"
+  },
+  "s038": {
+   "src": "file:media/clips/local/M038-fast-s1347803143_00001_.mp4",
+   "at": 87.569
+  },
+  "s041": {
+   "src": "still:media/layers/s041_her_s939028892-329224445_00001_.png",
+   "at": 94.801,
+   "seconds": 1.7800000000000011,
+   "note": "Lati's r5-4"
+  },
+  "s046": {
+   "src": "fit:s043grok-1-beat",
+   "note": "the walk runs on; its take covers to 108.05"
+  },
+  "s047": {
+   "segments": [
+    {
+     "until": 107.87,
+     "src": "fit:s043grok-1-beat"
+    },
+    {
+     "src": "fit:s047nov-1-lips"
+    }
+   ],
+   "note": "new take"
+  },
+  "s048": {
+   "src": "fit:s020-reroll2-beat",
+   "note": "Lati, 1 Nov: s048nov-7's moves out; his reserved take, no lip sync, carries over to s050 as a concert montage"
+  },
+  "s061": {
+   "segments": [
+    {
+     "until": 151.78,
+     "src": "fit:s060grok-1-beat"
+    },
+    {
+     "until": 152.32,
+     "card": "FINE"
+    },
+    {
+     "src": "fit:s060grok-1-beat"
+    }
+   ],
+   "note": "s060's take runs on; the FINE card on 'fine'"
+  },
+  "s062": {
+   "src": "file:media/clips/local/M062-fast-s135756525_00001_.mp4",
+   "at": 152.673,
+   "note": "first 1.8 s: before the blue lift and the face drift"
+  },
+  "s069": {
+   "card": "GRAPHICS",
+   "note": "Lati: pure graphics; placeholder"
+  },
+  "s068": {
+   "segments": [
+    {
+     "until": 170.978,
+     "src": "file:media/clips/local/S068-fast-s1909989742_00001_.mp4",
+     "at": 168.648
+    },
+    {
+     "card": "GRAPHICS"
+    }
+   ],
+   "note": "Lati: cut before the modulated Aaaa, right after 'time'; the graphics start here"
+  },
+  "s033": {
+   "src": "raw:s033nov-1",
+   "at": 78.526
+  },
+  "s073": {
+   "src": "file:media/clips/preview/s073-phone.mp4",
+   "at": 186.659,
+   "note": "Lati: on a phone held up by a bare hand; held plate with handheld drift"
+  }
+ },
+ "grids": {
+  "chant1": {
+   "cells": [
+    [
+     "S029A",
+     65.86,
+     66.2
+    ],
+    [
+     "S029B",
+     66.34,
+     66.64
+    ],
+    [
+     "S029C",
+     66.76,
+     67.12
+    ],
+    [
+     "S029D",
+     67.22,
+     67.56,
+     "flip"
+    ]
+   ],
+   "centre": [
+    "S029E",
+    67.68,
+    68.0
+   ]
+  },
+  "chant2": {
+   "cells": [
+    [
+     "S029A",
+     69.54,
+     69.84
+    ],
+    [
+     "S029B",
+     69.94,
+     70.28
+    ],
+    [
+     "S029C",
+     70.4,
+     70.76
+    ]
+   ],
+   "fill": [
+    "S029D",
+    70.86,
+    71.2,
+    "flip"
+   ]
+  }
+ }
+}

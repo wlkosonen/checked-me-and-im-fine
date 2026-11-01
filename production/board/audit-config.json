@@ -1,0 +1,81 @@
+{
+ "lead_min": 0.6,
+ "price_per_s": 0.0,
+ "budget_usd": 0,
+ "sung_window": [
+  1.4,
+  8
+ ],
+ "motion_window": [
+  1.5,
+  10
+ ],
+ "min_graphic_kinds": 6,
+ "banned": [
+  "chains",
+  "chained",
+  "shackles",
+  "help me",
+  "let me out",
+  "set me free",
+  "split-flap",
+  "xp desktop",
+  "sim level",
+  "chatgpt",
+  "openai",
+  "gemini",
+  "copilot",
+  "iphone",
+  "macbook",
+  "terminator",
+  "skynet",
+  "hal 9000",
+  "ex machina",
+  "westworld",
+  "blade runner",
+  "context meter",
+  "tablet"
+ ],
+ "pace": {
+  "Intro": [
+   1.5,
+   4.5
+  ],
+  "Verse 1": [
+   1.5,
+   3.5
+  ],
+  "Pre-Chorus": [
+   1.5,
+   3.5
+  ],
+  "Chorus": [
+   1.5,
+   3.5
+  ],
+  "Post-Chorus": [
+   1.5,
+   2.5
+  ],
+  "Verse 2": [
+   1.5,
+   3.5
+  ],
+  "Break": [
+   1.5,
+   4
+  ],
+  "Bridge": [
+   3,
+   7
+  ],
+  "Final Chorus": [
+   1.5,
+   3.5
+  ],
+  "Outro": [
+   3,
+   6
+  ]
+ }
+}

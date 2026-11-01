@@ -1,0 +1,43 @@
+{
+ "clip": "cut",
+ "song_offset": null,
+ "saved": "2026-11-01 05:03:16",
+ "marks": [
+  {
+   "t": 10.991,
+   "song": 10.991,
+   "shot": "s004",
+   "note": "text drift on screen"
+  },
+  {
+   "t": 23.302,
+   "song": 23.302,
+   "shot": "s008",
+   "note": "graphics nudge around and have trouble to stay on screen."
+  },
+  {
+   "t": 31.323,
+   "song": 31.323,
+   "shot": "s011",
+   "note": "text on screen drifts up and out of bounds."
+  },
+  {
+   "t": 86.978,
+   "song": 86.978,
+   "shot": "s037",
+   "note": "text on monitor drifts and moves"
+  },
+  {
+   "t": 100.464,
+   "song": 100.464,
+   "shot": "s043",
+   "note": "walk was supposed to be extended, and the next slice gone, ironically that is the one referenced for \"subpar moves\""
+  },
+  {
+   "t": 105.682,
+   "song": 105.682,
+   "shot": "s046",
+   "note": "this in comparison is a great shot"
+  }
+ ]
+}

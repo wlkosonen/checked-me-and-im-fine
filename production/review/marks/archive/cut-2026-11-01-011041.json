@@ -1,0 +1,109 @@
+{
+ "clip": "cut",
+ "song_offset": null,
+ "saved": "2026-11-01 00:42:31",
+ "marks": [
+  {
+   "t": 14.729,
+   "song": 14.729,
+   "shot": "s005",
+   "note": "this swapped s005 should transition just before \"new tab\" becomes sung"
+  },
+  {
+   "t": 23.998,
+   "song": 23.998,
+   "shot": "s008",
+   "note": "two stills in a succession kills the motion. one of these needs a motion shot"
+  },
+  {
+   "t": 37.629,
+   "song": 37.629,
+   "shot": "s013",
+   "note": "dance is awkward and does not belong, walk would fit better"
+  },
+  {
+   "t": 39.507,
+   "song": 39.507,
+   "shot": "s014",
+   "note": "this one is fine, but without previous part"
+  },
+  {
+   "t": 43.343,
+   "song": 43.343,
+   "shot": "s016",
+   "note": "any dance stage shots start from here only"
+  },
+  {
+   "t": 46.833,
+   "song": 46.833,
+   "shot": "s018",
+   "note": "needs motion"
+  },
+  {
+   "t": 48.567,
+   "song": 48.567,
+   "shot": "s019",
+   "note": "needs motion"
+  },
+  {
+   "t": 50.281,
+   "song": 50.281,
+   "shot": "s020",
+   "note": "motion starts too late, first moments are frozen"
+  },
+  {
+   "t": 66.933,
+   "song": 66.933,
+   "shot": "s027",
+   "note": "\"Fine\" frames should play until her mouth is closed"
+  },
+  {
+   "t": 70.688,
+   "song": 70.688,
+   "shot": "s029",
+   "note": "same as previous"
+  },
+  {
+   "t": 88.319,
+   "song": 88.319,
+   "shot": "s038",
+   "note": "id prefer motion shot here"
+  },
+  {
+   "t": 108.399,
+   "song": 108.399,
+   "shot": "s047",
+   "note": "too many stills in succession"
+  },
+  {
+   "t": 117.078,
+   "song": 117.078,
+   "shot": "s051",
+   "note": "beat drops just before \"hey hey hey\" so motion should stop before that too"
+  },
+  {
+   "t": 127.336,
+   "song": 127.336,
+   "shot": "s054",
+   "note": "for this and s055 id suggest a teams ui overlay with some other AI avatars in the scene"
+  },
+  {
+   "t": 153.28,
+   "song": 153.28,
+   "shot": "s062",
+   "note": "two stills in a row"
+  },
+  {
+   "t": 173.986,
+   "song": 173.986,
+   "shot": "s069",
+   "note": "sustained \"aaaaaAAAaaaAAA\" vocal and still does not work. perhaps pure graphics shot?"
+  },
+  {
+   "t": 187.542,
+   "song": 187.542,
+   "shot": "s073",
+   "note": "this shot should be on a phone screen that a hand is holding up"
+  }
+ ]
+}

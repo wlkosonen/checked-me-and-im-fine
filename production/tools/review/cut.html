@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cut preview</title>
+<style>
+  :root { --bg:#111214; --panel:#1a1c1f; --line:#2b2e33; --text:#e6e6e6; --dim:#8a8f98; --accent:#e8875a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:13px/1.4 system-ui, sans-serif; display:flex; flex-direction:column; height:100vh; }
+  #stage { flex:1; min-height:0; position:relative; background:#000; }
+  #stage video, #stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; visibility:hidden; }
+  #tag { position:absolute; left:10px; top:10px; background:rgba(0,0,0,.6); padding:2px 8px; border-radius:4px; color:var(--accent);
+         font:600 12px ui-monospace, monospace; }
+  #bar { display:flex; gap:14px; align-items:center; padding:6px 10px; border-top:1px solid var(--line); flex-wrap:wrap; padding-right:50px; }
+  #time { font:600 15px ui-monospace, monospace; min-width:250px; color:var(--accent); }
+  #slide { font:600 13px ui-monospace, monospace; }
+  button { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:4px; padding:3px 8px; cursor:pointer; }
+  a { color:var(--accent); text-decoration:none; }
+  label { color:var(--dim); }
+  #tl { position:relative; height:150px; border-top:1px solid var(--line); cursor:crosshair; }
+  #tl canvas { position:absolute; left:0; top:0; width:100%; height:100%; }
+  #marks { max-height:92px; overflow:auto; border-top:1px solid var(--line); font:12px ui-monospace, monospace; }
+  #marks:empty { display:none; }
+  #marks div { display:flex; gap:8px; align-items:center; padding:1px 10px; }
+  #marks input { flex:1; background:transparent; color:var(--text); border:none; font:inherit; }
+</style>
+</head>
+<body>
+<div id="stage"><video id="va" muted preload="auto"></video><video id="vb" muted preload="auto"></video><img id="im"><div id="tag">–</div></div>
+<audio id="song" src="/media/song/checked-me-v1.wav" preload="auto"></audio>
+<div id="bar">
+  <a href="/">← player</a> <a href="/library">library</a> <a id="gfx" href="/cut?gfx=0">without graphics</a>
+  <div id="time">–</div>
+  <button id="play">Play</button>
+  <label>Speed <input id="speed" type="range" min="0.1" max="1.5" step="0.05" value="1"> <span id="speedv">1.00×</span></label>
+  <span id="slide"></span><button id="save" title="S">save slide / pick</button><span id="msg" style="color:var(--dim)"></span>
+  <button id="clearm" title="for a new cut: the notes move to production/review/marks/archive, nothing is deleted">clear notes</button>
+</div>
+<div id="tl"><canvas id="wave"></canvas><canvas id="over"></canvas></div>
+<div id="marks"></div>
+<script>
+window.HELP = [["Space", "play / pause (the song is the clock; the clips follow it)"], [", .", "one frame back / forward (Shift: 10)"],
+  ["← →", "previous / next shot"], ["Alt+← Alt+→", "slide the shot under the playhead one frame earlier / later (Shift: 5)"],
+  ["M", "marker with a note at the playhead: what should happen here, for Kiln (Enter closes the note)"],
+  ["clear notes", "two clicks: starts a new cut's review; the old notes are archived, not deleted"],
+  ["S", "save the slide, or the candidate from the player, as your pick for that shot"], ["[ ]", "speed down / up"],
+  ["Z", "zoom the timeline to 6 s around the playhead"], ["0", "whole song"], ["?", "this help"]];
+const $ = id => document.getElementById(id);
+const song = $("song"), vids = [$("va"), $("vb")], im = $("im"), wave = $("wave"), over = $("over"), tl = $("tl");
+const FPS = 25; let plan = null, shots = [], marks = [], slide = {}, view = [0, 1], mix = null, beats = [], active = 0, cand = null;
+const q = new URLSearchParams(location.search);
+if (q.get("gfx") === "0") { const a = document.getElementById("gfx"); a.href = "/cut"; a.textContent = "with graphics"; }
+const fmt = t => { const m = Math.floor(t / 60), s = t - m * 60; return `${m}:${s.toFixed(3).padStart(6, "0")}`; };
+
+async function load() {
+  plan = await (await fetch(`/api/cutplan?gfx=${q.get("gfx") === "0" ? 0 : 1}`)).json(); shots = plan.shots;
+  if (q.get("cand") && q.get("shot")) {
+    const s = shots.find(x => x.id === q.get("shot")); const inp = q.get("in") !== null && q.get("in") !== "" ? +q.get("in") : null;
+    if (s) { cand = s.id; Object.assign(s, { kind: "video", file: q.get("cand"), at: inp != null ? s.t0 - inp : s.t0, src: "candidate" }); }
+  }
+  draw();
+}
+async function init() {
+  await load();
+  beats = (await (await fetch("/media/song/analysis/checked-me-v1/beats.json")).json()).beats;
+  marks = (await (await fetch("/api/meta?path=cut")).json()).marks; renderMarks();
+  view = [0, plan.duration];
+  if (q.get("t")) { song.currentTime = Math.max(0, +q.get("t")); const t = +q.get("t"); view = [t - 1, t + 7]; }
+  draw(); requestAnimationFrame(tick);
+  const ab = await (await fetch("/media/song/checked-me-v1.wav")).arrayBuffer();
+  const buf = await new (window.AudioContext || window.webkitAudioContext)().decodeAudioData(ab);
+  const d = buf.getChannelData(0); mix = { data: d, rate: buf.sampleRate, peak: 0.9 }; draw();
+}
+const shotAt = T => shots.find(s => T >= s.t0 && T < s.t1) || shots[shots.length - 1];
+const atOf = s => s.at + (slide[s.id] || 0) / FPS;
+function x2t(x) { return view[0] + x / wave.clientWidth * (view[1] - view[0]); }
+function t2x(t) { return (t - view[0]) / (view[1] - view[0]) * wave.clientWidth; }
+const COL = { pick: "#e8875a", candidate: "#ffb347", shot: "#4c7fb0", clip: "#5e9e6a", still: "#555a63", none: "#7a3b3b" };
+function draw() {
+  if (!plan) return;
+  wave.width = over.width = wave.clientWidth * devicePixelRatio; wave.height = over.height = wave.clientHeight * devicePixelRatio;
+  const g = wave.getContext("2d"); g.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  const w = wave.clientWidth, h = wave.clientHeight; g.fillStyle = "#16181b"; g.fillRect(0, 0, w, h);
+  g.font = "11px ui-monospace, monospace";
+  for (const s of shots) { const x0 = t2x(s.t0), x1 = t2x(s.t1); if (x1 < 0 || x0 > w) continue;
+    g.fillStyle = COL[s.src] || "#444"; g.globalAlpha = 0.55; g.fillRect(x0 + 1, 4, x1 - x0 - 2, 30); g.globalAlpha = 1;
+    g.fillStyle = "#e6e6e6"; if (x1 - x0 > 28) g.fillText(s.id + (slide[s.id] ? ` ${slide[s.id] > 0 ? "+" : ""}${slide[s.id]}f` : ""), x0 + 4, 23); }
+  g.strokeStyle = "#33373e";
+  for (const b of beats) { if (b < view[0] || b > view[1]) continue; const x = t2x(b); g.beginPath(); g.moveTo(x, 36); g.lineTo(x, h); g.stroke(); }
+  g.fillStyle = "#e8d25a"; for (const m of marks) { const x = t2x(m.t); if (x < 0 || x > w) continue;
+    g.fillRect(x - 1, 0, 2, h); if (m.note) g.fillText(m.note.slice(0, 40), x + 5, h - 6); }
+  if (mix) { g.fillStyle = "#5aa9e8"; const mid = 36 + (h - 36) / 2, amp = (h - 40) / 2;
+    for (let px = 0; px < w; px++) { const a = Math.floor(x2t(px) * mix.rate), b = Math.floor(x2t(px + 1) * mix.rate);
+      if (b <= 0 || a >= mix.data.length) continue; let lo = 0, hi = 0; const st = Math.max(1, Math.floor((b - a) / 300));
+      for (let i = Math.max(0, a); i < Math.min(b, mix.data.length); i += st) { const v = mix.data[i]; if (v < lo) lo = v; if (v > hi) hi = v; }
+      g.fillRect(px, mid - hi / mix.peak * amp, 1, Math.max(1, (hi - lo) / mix.peak * amp)); } }
+}
+function saveMarks() { return fetch("/api/marks", { method: "POST", headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ path: "cut", marks }) }); }
+function addMark() {
+  song.pause(); const t = +song.currentTime.toFixed(3), m = { t, song: t, shot: shotAt(t).id, note: "" };
+  marks.push(m); marks.sort((a, b) => a.t - b.t); renderMarks(); saveMarks(); draw();
+  $("marks").children[marks.indexOf(m)].querySelector("input").focus();
+}
+function renderMarks() {
+  const box = $("marks"); box.innerHTML = "";
+  marks.forEach((m, i) => { const r = document.createElement("div"), lab = document.createElement("span"), inp = document.createElement("input");
+    lab.textContent = `${fmt(m.t)} ${m.shot}`; inp.value = m.note; inp.placeholder = "what should happen here";
+    inp.onchange = () => { m.note = inp.value; saveMarks(); draw(); }; inp.onkeydown = e => { if (e.key === "Enter") inp.blur(); };
+    const go = document.createElement("button"), del = document.createElement("button"); go.textContent = "go"; del.textContent = "×";
+    go.onclick = () => { song.currentTime = m.t; go.blur(); }; del.onclick = () => { marks.splice(i, 1); renderMarks(); saveMarks(); draw(); };
+    r.append(lab, inp, go, del); box.appendChild(r); });
+  window.dispatchEvent(new Event("resize"));
+}
+$("clearm").onclick = async () => {  // two clicks: a stray one only arms the button
+  const b = $("clearm");
+  if (b.dataset.armed !== "1") { b.dataset.armed = "1"; b.textContent = "sure? click again"; setTimeout(() => { b.dataset.armed = ""; b.textContent = "clear notes"; }, 3000); return; }
+  b.dataset.armed = ""; b.textContent = "clear notes";
+  const r = await (await fetch("/api/marks/clear", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })).json();
+  if (r.ok) { marks = []; renderMarks(); draw(); $("msg").textContent = "✓ notes archived"; }
+};
+function place(v, s, T) {  // put clip s on video v at song time T
+  const want = "/" + s.file;
+  if (v.dataset.file !== want) { v.dataset.file = want; v.src = want; }
+  const raw = T - atOf(s), end = (v.duration || 1e9) - 0.05, d = Math.max(0, Math.min(end, raw));
+  // a clip shorter than its shot holds its last frame: play() on an ended video would restart it from frame 0
+  if (song.paused || raw < 0 || raw >= end) { if (Math.abs(v.currentTime - d) > 0.015) v.currentTime = d; if (!v.paused) v.pause(); }
+  else { v.playbackRate = song.playbackRate; if (Math.abs(v.currentTime - d) > 0.12) v.currentTime = d; if (v.paused) v.play().catch(() => {}); }
+}
+function tick() {
+  const T = song.currentTime, s = shotAt(T);
+  if (s.kind === "video") {
+    let v = vids[active];
+    if (v.dataset.file !== "/" + s.file && vids[1 - active].dataset.file === "/" + s.file) { active = 1 - active; v = vids[active]; }
+    place(v, s, T); v.style.visibility = "visible"; vids[1 - active].style.visibility = "hidden"; im.style.visibility = "hidden";
+    const nx = shots[shots.indexOf(s) + 1];  // preload the next clip in the other video
+    if (nx && nx.kind === "video" && nx.file !== s.file) { const o = vids[1 - active];
+      if (o.dataset.file !== "/" + nx.file) { o.dataset.file = "/" + nx.file; o.src = "/" + nx.file; o.currentTime = Math.max(0, nx.t0 - atOf(nx)); }
+      else if (!o.paused) o.pause(); }
+  } else {
+    vids.forEach(v => { v.style.visibility = "hidden"; if (!v.paused) v.pause(); });
+    if (s.kind === "image") { if (im.dataset.file !== s.file) { im.dataset.file = s.file; im.src = "/" + s.file; } im.style.visibility = "visible"; }
+    else im.style.visibility = "hidden";
+  }
+  $("tag").textContent = `${s.id} · ${s.src}${s.file ? " · " + s.file.split("/").pop() : ""}`;
+  $("time").textContent = `♪ ${fmt(T)} · f${Math.round(T * FPS)}`;
+  $("slide").textContent = slide[s.id] ? `${s.id} slid ${slide[s.id] > 0 ? "+" : ""}${slide[s.id]} f (S saves)` : (s.src === "candidate" ? `candidate in ${s.id} (S saves)` : "");
+  const g = over.getContext("2d"); g.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); g.clearRect(0, 0, over.clientWidth, over.clientHeight);
+  const x = t2x(T); g.strokeStyle = "#e8875a"; g.lineWidth = 2; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, over.clientHeight); g.stroke();
+  if (!song.paused && (T > view[1] || T < view[0])) { const sp = view[1] - view[0]; view = [T - sp * 0.1, T + sp * 0.9]; draw(); }
+  requestAnimationFrame(tick);
+}
+async function save() {
+  const s = shotAt(song.currentTime);
+  if (s.kind !== "video" || (!slide[s.id] && s.src !== "candidate")) { $("msg").textContent = "nothing to save in " + s.id; return; }
+  const r = await (await fetch("/api/use", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ shot: s.id, clip: s.file, in: +(s.t0 - atOf(s)).toFixed(3), out: null }) })).json();
+  $("msg").textContent = r.ok ? `✓ saved ${s.id}` : "failed";
+  delete slide[s.id]; if (s.src === "candidate") cand = null;
+  const keepT = song.currentTime; q.delete("cand"); await load(); song.currentTime = keepT;
+}
+let drag = null;
+tl.addEventListener("mousedown", e => drag = { x: e.offsetX, v: [...view], moved: false });
+window.addEventListener("mousemove", e => { if (!drag) return; const dx = e.clientX - tl.getBoundingClientRect().left - drag.x;
+  if (Math.abs(dx) > 3) drag.moved = true; if (!drag.moved) return; const dt = dx / wave.clientWidth * (drag.v[1] - drag.v[0]);
+  view = [drag.v[0] - dt, drag.v[1] - dt]; draw(); });
+window.addEventListener("mouseup", () => { if (drag && !drag.moved) song.currentTime = Math.max(0, x2t(drag.x)); drag = null; });
+tl.addEventListener("wheel", e => { e.preventDefault(); const t = x2t(e.offsetX), k = e.deltaY > 0 ? 1.25 : 0.8;
+  const sp = Math.max(0.3, Math.min(plan.duration * 1.1, (view[1] - view[0]) * k)), r = (t - view[0]) / (view[1] - view[0]);
+  view = [t - r * sp, t - r * sp + sp]; draw(); }, { passive: false });
+$("play").onclick = () => song.paused ? song.play() : song.pause();
+song.onplay = () => $("play").textContent = "Pause"; song.onpause = () => $("play").textContent = "Play";
+$("speed").oninput = () => { song.playbackRate = +$("speed").value; $("speedv").textContent = (+$("speed").value).toFixed(2) + "×"; };
+$("save").onclick = save;
+window.addEventListener("resize", draw);
+window.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT" && e.target.type !== "range") return;
+  const k = e.key, s = shotAt(song.currentTime);
+  if (k === " ") { e.preventDefault(); song.paused ? song.play() : song.pause(); }
+  else if (k === "," || k === "<") { song.pause(); song.currentTime = Math.max(0, song.currentTime - (e.shiftKey ? 10 : 1) / FPS); }
+  else if (k === "." || k === ">") { song.pause(); song.currentTime += (e.shiftKey ? 10 : 1) / FPS; }
+  else if ((k === "ArrowLeft" || k === "ArrowRight") && e.altKey) { e.preventDefault();
+    slide[s.id] = (slide[s.id] || 0) + (k === "ArrowRight" ? 1 : -1) * (e.shiftKey ? 5 : 1); if (!slide[s.id]) delete slide[s.id]; draw(); }
+  else if (k === "ArrowLeft") { const i = shots.indexOf(s); song.currentTime = song.currentTime - s.t0 > 0.3 || i === 0 ? s.t0 : shots[i - 1].t0; }
+  else if (k === "ArrowRight") { const i = shots.indexOf(s); if (shots[i + 1]) song.currentTime = shots[i + 1].t0; }
+  else if (k === "s" || k === "S") save();
+  else if (k === "m" || k === "M") { e.preventDefault(); addMark(); }
+  else if (k === "[" || k === "]") { const sp = $("speed"); sp.value = Math.max(0.1, Math.min(1.5, +sp.value + (k === "]" ? 0.05 : -0.05))); sp.oninput(); }
+  else if (k === "z" || k === "Z") { const t = song.currentTime; view = [t - 2, t + 4]; draw(); }
+  else if (k === "0") { view = [0, plan.duration]; draw(); }
+});
+init();
+</script>
+<script src="/help.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clip library</title>
+<style>
+  :root { --bg:#111214; --panel:#1a1c1f; --line:#2b2e33; --text:#e6e6e6; --dim:#8a8f98; --accent:#e8875a;
+          --keep:#7cc48a; --cut:#e8875a; --spare:#5aa9e8; --reject:#a05a5a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:13px/1.4 system-ui, sans-serif; }
+  header { position:sticky; top:0; z-index:2; background:var(--bg); border-bottom:1px solid var(--line); padding:8px 12px;
+           display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  header a { color:var(--accent); }
+  input, select, button { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:4px; padding:4px 6px; font:inherit; }
+  #count { color:var(--dim); }
+  h2 { font-size:13px; color:var(--dim); margin:12px 12px 4px; font-weight:600; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px; padding:6px 12px 16px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:6px; overflow:hidden; cursor:pointer; }
+  .card:hover { border-color:var(--accent); }
+  .thumb { aspect-ratio:16/9; background-size:800% 100%; background-repeat:no-repeat; background-color:#000; }
+  .body { padding:6px 8px 8px; }
+  .id { font:600 12px ui-monospace, monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .meta { color:var(--dim); font-size:12px; margin-top:2px; }
+  .verdict { margin-top:4px; font-size:12px; }
+  .heard { margin-top:3px; font-size:12px; color:#d9c27a; font-style:italic; }
+  .badge { display:inline-block; padding:0 5px; border-radius:3px; font-size:11px; margin-right:3px; border:1px solid var(--line); }
+  .s-in-cut { color:var(--cut); border-color:var(--cut); } .s-keep { color:var(--keep); border-color:var(--keep); }
+  .s-spare { color:var(--spare); border-color:var(--spare); } .s-reject { color:var(--reject); border-color:var(--reject); }
+  .s-review { color:#e8d25a; border-color:#e8d25a; }
+  .rev { display:flex; gap:4px; margin-top:6px; } .rev input { flex:1; min-width:0; } .rev select, .rev button { padding:2px 4px; }
+  .score { float:right; color:var(--accent); font:600 12px ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<header>
+  <a href="/">← player</a> <a href="/cut">cut preview</a>
+  <input id="q" placeholder="Search words, verdicts, ids…" size="28">
+  <select id="kind"><option value="">all kinds</option><option>dance</option><option>sung</option><option>motion</option><option>layers</option></select>
+  <select id="source"><option value="">all sources</option><option>grok</option><option>grok-pilot</option><option>infinitetalk</option><option>wan</option><option>layers</option></select>
+  <select id="status"><option value="-reject">all but rejected</option><option value="review">to review</option><option value="">everything</option><option>in cut</option><option>keep</option><option>spare</option><option>reject</option></select>
+  <select id="place"><option value="">all places</option></select>
+  <select id="sort"><option value="shot">by shot</option><option value="energy">most movement</option><option value="seconds">longest</option></select>
+  <label>Find a fill for <select id="fill"><option value="">—</option></select></label>
+  <span id="count"></span>
+</header>
+<div id="fillbox"></div>
+<div class="grid" id="grid"></div>
+<script>
+const $ = id => document.getElementById(id);
+let clips = [], shots = {};
+async function init() {
+  clips = (await (await fetch("/production/library/clips.json?" + Date.now())).json()).clips;
+  const b = await (await fetch("/production/board/board.json")).json();
+  for (const s of b.shots) shots[s.id] = s;
+  for (const p of [...new Set(clips.map(c => c.place).filter(Boolean))].sort()) $("place").add(new Option(p));
+  for (const s of b.shots) $("fill").add(new Option(`${s.id} · ${s.framing} · ${s.route} · ${s.set.slice(0, 34)}`, s.id));
+  const f = new URLSearchParams(location.search).get("fill"); if (f) $("fill").value = f;
+  for (const id of ["q", "kind", "source", "status", "place", "sort", "fill"]) $(id).oninput = render;
+  render();
+}
+const PLACES = [["mic", ["lips"]], ["black", ["black"]], ["phone", ["phone screen", "phone light", "in the phone"]],
+  ["call", ["call", "shared screen"]], ["desk", ["desk", "laptop"]],
+  ["keynote", ["keynote", "slide", "podium", "lectern", "corporate", "hall", "answer cards"]],
+  ["concert", ["concert", "stage", "led wall", "dancers", "crowd", "rig", "arena"]]];
+const placeOf = s => { const st = s.set.toLowerCase(); const p = PLACES.find(([, k]) => k.some(x => st.includes(x))); return p ? p[0] : st; };
+function score(c, s) {  // how well clip c could fill shot s
+  if (c.status === "reject") return -1;
+  const want = s.route === "grok" ? "sung" : s.route === "it" ? "sung" : s.route === "wan" ? "motion" : "dance";
+  let x = 0;
+  if (c.made_for === s.id) x += 5;
+  if (c.place === placeOf(s)) x += 3;
+  if (c.framing === s.framing) x += 2;
+  if (c.kind === want) x += 2; else if (want === "dance" && c.kind === "layers") x += 1;
+  if (!c.used_by.length) x += 1.5;
+  if (c.status === "spare") x += 1;
+  if (c.kind === "dance") x += Math.min(1.5, c.energy / 6);
+  if (c.seconds < s.t1 - s.t0) x -= 2;
+  return Math.round(x * 10) / 10;
+}
+function card(c, sc) {
+  const d = document.createElement("div"); d.className = "card";
+  const st = c.status.replace(" ", "-");
+  d.innerHTML = `<div class="thumb" style="background-image:url('/${c.strip}')"></div><div class="body">
+    ${sc != null ? `<span class="score">${sc}</span>` : ""}<div class="id" title="${c.path}">${c.id}</div>
+    <div class="meta">${c.reviewed ? "" : `<span class="badge s-review">to review</span>`}<span class="badge s-${st}">${c.status}</span><span class="badge">${c.source}</span><span class="badge">${c.kind}</span>
+    ${c.made_for || ""} ${c.framing || ""} ${c.place || ""} · ${c.seconds}s${c.bpm ? " · " + c.bpm + " BPM" : ""} · move ${c.energy}</div>
+    ${c.used_by.length ? `<div class="meta">used by ${c.used_by.join(", ")}</div>` : ""}
+    ${c.verdict ? `<div class="verdict">${c.verdict}</div>` : ""}${c.heard ? `<div class="heard">“${c.heard}”</div>` : ""}
+    <div class="rev"><select><option value="">verdict…</option><option>keep</option><option>spare</option><option>reject</option></select>
+    <input placeholder="note for Kiln (Enter saves)"><button title="saves the verdict and note; with nothing filled in, marks the clip seen">save</button></div></div>`;
+  const rv = d.querySelector(".rev"), [sel, inp, btn] = rv.children;
+  rv.onclick = e => e.stopPropagation();
+  const save = async () => {
+    const r = await (await fetch("/api/note", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ path: c.path, status: sel.value, note: inp.value }) })).json();
+    if (!r.ok) { btn.textContent = "failed"; return; }
+    c.reviewed = true; if (r.note.note) c.verdict = r.note.note;
+    if (r.note.status) c.status = c.used_by.length && r.note.status !== "reject" ? "in cut" : r.note.status;
+    render();
+  };
+  btn.onclick = save; inp.onkeydown = e => { if (e.key === "Enter") save(); };
+  const th = d.querySelector(".thumb");
+  th.onmousemove = e => { const k = Math.min(7, Math.floor(e.offsetX / th.clientWidth * 8)); th.style.backgroundPosition = `${k / 7 * 100}% 0`; };
+  th.onmouseleave = () => th.style.backgroundPosition = "0 0";
+  d.onclick = () => location.href = "/?clip=" + encodeURIComponent(c.path) + ($("fill").value ? "&shot=" + $("fill").value : "");
+  return d;
+}
+function render() {
+  const q = $("q").value.toLowerCase(), k = $("kind").value, so = $("source").value, st = $("status").value, pl = $("place").value;
+  let list = clips.filter(c => (!k || c.kind === k) && (!so || c.source === so) && (!pl || c.place === pl)
+    && (st === "" || (st === "-reject" ? c.status !== "reject" : st === "review" ? !c.reviewed : c.status === st))
+    && (!q || [c.id, c.verdict, c.heard, c.made_for, (c.used_by || []).join(" ")].join(" ").toLowerCase().includes(q)));
+  const by = $("sort").value;
+  list.sort((a, b) => by === "energy" ? b.energy - a.energy : by === "seconds" ? b.seconds - a.seconds
+    : (a.made_for || "z").localeCompare(b.made_for || "z") || a.id.localeCompare(b.id));
+  $("grid").innerHTML = ""; for (const c of list) $("grid").appendChild(card(c));
+  $("count").textContent = `${list.length} of ${clips.length} clips`;
+  const f = $("fill").value; $("fillbox").innerHTML = "";
+  if (f && shots[f]) {
+    const s = shots[f], ranked = clips.map(c => [score(c, s), c]).filter(([x]) => x > 0).sort((a, b) => b[0] - a[0]).slice(0, 6);
+    const h = document.createElement("h2"); h.textContent = `Best fits for ${f} (${s.framing}, ${placeOf(s)}, ${s.route}, ${(s.t1 - s.t0).toFixed(2)} s): click one, set in/out with I and O, then "use for ${f}"`;
+    const g = document.createElement("div"); g.className = "grid"; for (const [x, c] of ranked) g.appendChild(card(c, x));
+    $("fillbox").append(h, g);
+  }
+}
+window.HELP = [["hover", "scrub a clip's filmstrip"], ["click", "open the clip in the player (with the fill's shot filled in)"],
+  ["to review", "clips with no verdict, note or seen from you yet"],
+  ["verdict + note + save", "on each card: saved verbatim for Kiln; empty save = seen"], ["Find a fill", "ranks clips for a shot: place, framing, kind, unused, spare, movement"], ["?", "this help"]];
+init();
+</script>
+<script src="/help.js"></script>
+</body>
+</html>

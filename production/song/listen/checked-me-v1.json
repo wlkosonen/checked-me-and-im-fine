@@ -1,0 +1,66 @@
+{
+ "tempo_range": [
+  120,
+  145
+ ],
+ "note": "22 Oct, Kiln: the take runs ~132.6 BPM (not the 151 in the style prompt); 140-160 locked onto a wrong grid",
+ "words": [
+  {
+   "i": 0,
+   "w": "check",
+   "t0": 3.16,
+   "t1": 3.36,
+   "note": "Lati, 22 Oct: \"check\" x3 at 0:03-0:04; vocal stem bursts"
+  },
+  {
+   "i": 1,
+   "w": "check",
+   "t0": 3.38,
+   "t1": 3.6,
+   "note": "Lati, 22 Oct: \"check\" x3 at 0:03-0:04; vocal stem bursts"
+  },
+  {
+   "i": 2,
+   "w": "check",
+   "t0": 3.64,
+   "t1": 3.94,
+   "note": "Lati, 22 Oct: \"check\" x3 at 0:03-0:04; vocal stem bursts"
+  },
+  {
+   "i": 306,
+   "w": "check",
+   "t0": 180.68,
+   "t1": 181.0,
+   "note": "Lati, 22 Oct: outro \"check check\" (~2:58/3:01); vocal stem bursts 180.7-181.5"
+  },
+  {
+   "i": 307,
+   "w": "check",
+   "t0": 181.06,
+   "t1": 181.5,
+   "note": "Lati, 22 Oct: outro \"check check\" (~2:58/3:01); vocal stem bursts 180.7-181.5"
+  },
+  {
+   "i": 312,
+   "w": "hi",
+   "t0": 186.96,
+   "t1": 187.9,
+   "note": "Lati, 22 Oct: \"hi\" is 3.07 and fades to the end"
+  },
+  {
+   "i": 121,
+   "w": "first",
+   "t0": 71.28,
+   "t1": 71.62,
+   "note": "Kiln, 22 Oct: vocal stem onset; Whisper had put it before the fines, against Lati's sung order"
+  },
+  {
+   "i": 253,
+   "w": "trace",
+   "t0": 136.94,
+   "t1": 138.04,
+   "note": "Kiln, 22 Oct: vocal stem, a held note between 'the' and 'check'; not yet heard against picture"
+  }
+ ],
+ "sheet": "production/lyrics/sung.md"
+}

@@ -1,0 +1,31 @@
+{
+ "clip": "cut",
+ "song_offset": null,
+ "saved": "2026-11-01 01:22:27",
+ "marks": [
+  {
+   "t": 44.812,
+   "song": 44.812,
+   "shot": "s017",
+   "note": "motion of her moves starts bit too late"
+  },
+  {
+   "t": 113.378,
+   "song": 113.378,
+   "shot": "s050",
+   "note": "motion of her moves starts too late too"
+  },
+  {
+   "t": 136.714,
+   "song": 136.714,
+   "shot": "s056",
+   "note": "\"read the trace\" could have graphics of said trace, code or thinking or both"
+  },
+  {
+   "t": 170.978,
+   "song": 170.978,
+   "shot": "s068",
+   "note": "could be cut off before modulated AaaaaA starts, right here after \"time\""
+  }
+ ]
+}
